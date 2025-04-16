@@ -22,14 +22,22 @@ app.use(cookieParser());
 app.use(checkForAuthenticationCookie("token"));
 
 app.use(express.static(path.resolve("./public")));
+app.get("/",async (req,res)=>{
+    if(!req.user){
+        return res.redirect("/user/login");
+    }
 
-app.get("/", async(req, res) =>{
-    const allBlogs = await Blog.find({});
-    res.render("home", {
-        user: req.user,
-        blogs: allBlogs,
-    });
+    try {
+        const allBlog = await Blog.find({ });
+        return res.render("home",{
+            user: req.user,
+            blog: allBlog,
+        });
+    } catch (error) {
+        return res.status(500).send("Internal Server Error..");
+    }
 });
+
 
 app.use('/user', userRoute);
 app.use('/blog', blogRoute);
