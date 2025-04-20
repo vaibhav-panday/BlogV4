@@ -3,30 +3,66 @@
 <head>
     <%- include('./partials/head') %>
     <title>Signup</title>
+    <style>
+        body {
+            background-color: #f3f4f6;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .signup-wrapper {
+            max-width: 500px;
+            margin: 60px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control:focus {
+            border-color: #f72585;
+            box-shadow: 0 0 0 0.2rem rgba(247, 37, 133, 0.25);
+        }
+
+        .btn-primary {
+            background-color: #f72585;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #d61e70;
+        }
+
+        .form-text {
+            font-size: 0.85rem;
+        }
+    </style>
 </head>
 <body>
     <%- include('./partials/nav') %>
 
-    <div class="container mt-4">
-        <form action="/user/signup" method="post">
-            <div class="mb-3">
-                <label for="fullName" class="form-label">Full Name</label>
-                <input type="text" class="form-control" id="fullName" name="fullName" aria-describedby="emailHelp">
-              </div>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
-              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" name="password">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+    <div class="container">
+        <div class="signup-wrapper">
+            <h3 class="text-center mb-4 text-dark">👤 Create Your Account</h3>
+            <form action="/user/signup" method="post">
+                <div class="mb-3">
+                    <label for="fullName" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Choose a secure password" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+                </div>
+            </form>
+        </div>
     </div>
 
-   <%- include('./partials/scripts') %>
-
+    <%- include('./partials/scripts') %>
 </body>
 </html>

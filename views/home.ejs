@@ -1,28 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%- include('./partials/head') %>
-    <title>Home page</title>
+  <%- include('./partials/head') %>
+  <title>Home Page</title>
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .card {
+      border: none;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-img-top {
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #343a40;
+    }
+
+    .btn-primary {
+      background-color: #f72585;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #d61e70;
+    }
+
+    .section-heading {
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #212529;
+    }
+  </style>
 </head>
 <body>
-    <%- include('./partials/nav') %>
+  <%- include('./partials/nav') %>
 
-    <div class="container mt-3">
-      <div class="row row-cols-4">
-        <% blogs.forEach(blog => { %>
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-              <img src="<%= blog.coverImageURL %>" class="card-img-top" >
-              <div class="card-body">
-                <h5 class="card-title"><%= blog.title %></h5>
-                <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
-              </div>
+  <div class="container mt-4">
+    <h2 class="section-heading">📰 Latest Blogs</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+      <% blogs.forEach(blog => { %>
+        <div class="col">
+          <div class="card h-100">
+            <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="Blog Cover">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title mb-3"><%= blog.title %></h5>
+              <a href="/blog/<%= blog._id %>" class="btn btn-primary mt-auto">Read More</a>
             </div>
           </div>
-        <% }) %>
-      </div>
+        </div>
+      <% }) %>
     </div>
+  </div>
 
-    <%- include('./partials/scripts') %>
+  <%- include('./partials/scripts') %>
 </body>
 </html>

@@ -3,26 +3,62 @@
 <head>
     <%- include('./partials/head') %>
     <title>Signin</title>
+    <style>
+        body {
+            background-color: #f3f4f6;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .signin-wrapper {
+            max-width: 450px;
+            margin: 70px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control:focus {
+            border-color: #f72585;
+            box-shadow: 0 0 0 0.2rem rgba(247, 37, 133, 0.25);
+        }
+
+        .btn-primary {
+            background-color: #f72585;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #d61e70;
+        }
+
+        .form-label {
+            font-weight: 500;
+        }
+    </style>
 </head>
 <body>
     <%- include('./partials/nav') %>
 
-    <div class="container mt-4">
-        <form action="/user/signin" method="post">
-            <div class="mb-3">
-              <label for="email" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
-              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" name="password">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+    <div class="container">
+        <div class="signin-wrapper">
+            <h3 class="text-center mb-4 text-dark">🔐 Sign In to Your Account</h3>
+            <form action="/user/signin" method="post">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">Sign In</button>
+                </div>
+            </form>
+        </div>
     </div>
 
-   <%- include('./partials/scripts') %>
-
+    <%- include('./partials/scripts') %>
 </body>
 </html>
