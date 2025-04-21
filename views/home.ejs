@@ -5,64 +5,75 @@
   <title>Home Page</title>
   <style>
     body {
-      background-color: #f8f9fa;
+      background: #0f0f0f;
       font-family: 'Segoe UI', sans-serif;
+      color: #f8f9fa;
+    }
+
+    .section-heading {
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-align: center;
+      margin: 40px 0 30px;
+      color: #f72585;
+      text-shadow: 0 0 10px rgba(247, 37, 133, 0.5);
     }
 
     .card {
+      background: rgba(26, 26, 26, 0.7);
       border: none;
-      border-radius: 16px;
+      border-radius: 20px;
       overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      transform: translateY(50px);
+      opacity: 0;
+      transition: transform 0.6s ease, opacity 0.6s ease;
+      box-shadow: 0 0 12px rgba(247, 37, 133, 0.1);
+      backdrop-filter: blur(10px);
     }
 
     .card-img-top {
       height: 180px;
       object-fit: cover;
+      border-bottom: 2px solid #f72585;
     }
 
     .card-title {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       font-weight: 600;
-      color: #343a40;
+      color: #f8f9fa;
+      margin-bottom: 10px;
     }
 
     .btn-primary {
       background-color: #f72585;
       border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: all 0.3s ease;
     }
 
     .btn-primary:hover {
-      background-color: #d61e70;
+      background-color: #c41267;
+      box-shadow: 0 0 10px #f72585;
     }
 
-    .section-heading {
-      font-size: 2rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 30px;
-      color: #212529;
+    .container {
+      padding-bottom: 50px;
     }
   </style>
 </head>
 <body>
   <%- include('./partials/nav') %>
 
-  <div class="container mt-4">
+  <div class="container">
     <h2 class="section-heading">📰 Latest Blogs</h2>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
       <% blogs.forEach(blog => { %>
-        <div class="col">
+        <div class="col blog-card">
           <div class="card h-100">
             <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="Blog Cover">
             <div class="card-body d-flex flex-column">
-              <h5 class="card-title mb-3"><%= blog.title %></h5>
+              <h5 class="card-title"><%= blog.title %></h5>
               <a href="/blog/<%= blog._id %>" class="btn btn-primary mt-auto">Read More</a>
             </div>
           </div>
@@ -72,5 +83,18 @@
   </div>
 
   <%- include('./partials/scripts') %>
+
+  <!-- GSAP CDN for animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script>
+    // Animate cards on load like Framer Motion
+    gsap.to(".blog-card .card", {
+      y: 0,
+      opacity: 1,
+      duration: 1,
+      stagger: 0.2,
+      ease: "power3.out"
+    });
+  </script>
 </body>
 </html>

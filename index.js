@@ -26,7 +26,7 @@ app.use(checkForAuthenticationCookie("token"));
 
 app.use(express.static(path.resolve("./public")));
 
-app.get("/",async (req,res)=>{
+app.get("/home",async (req,res)=>{
     if(!req.user){
         return res.redirect("/user/signin");
     }
@@ -40,6 +40,10 @@ app.get("/",async (req,res)=>{
     } catch (error) {
         return res.status(500).send("Internal Server Error..");
     }
+});
+
+app.get("/", (req, res) =>{
+    return res.render("landing");
 });
 
 app.use('/user', userRoute);
